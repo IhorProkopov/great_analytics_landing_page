@@ -557,6 +557,16 @@ main {
     padding: 6.4rem 0;
   }
 
+  .feature-row:not(.flip) {
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap: 1.55rem;
+  }
+
+  .setup-shell {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 1.45rem;
+  }
+
   .hero-title-shell {
     display: block;
     padding: 0;
@@ -593,7 +603,7 @@ main {
   .hero-center-cursor-zone::before {
     content: "";
     position: absolute;
-    inset: -16%;
+    inset: 0;
     pointer-events: none;
     background: radial-gradient(
       220px circle at var(--mx, 50%) var(--my, 50%),
@@ -601,7 +611,7 @@ main {
       rgba(255, 122, 69, 0.09) 28%,
       rgba(255, 122, 69, 0) 64%
     );
-    filter: blur(10px);
+    filter: blur(12px);
   }
 
   .hero-center-cursor-zone[data-active="true"] {
@@ -611,13 +621,68 @@ main {
   .hero-signal {
     position: absolute;
     pointer-events: none;
+    --signal-leg: 4.5rem;
+  }
+
+  .hero-signal-group {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
 
   .hero-signal.left {
-    transform: translate(0, -50%);
+    transform: translate(calc(-100% - var(--signal-leg)), -50%);
   }
 
   .hero-signal.right {
+    transform: translate(var(--signal-leg), -50%);
+  }
+
+  .hero-signal-anchor,
+  .hero-signal-link {
+    position: absolute;
+    pointer-events: none;
+    transform: translateY(-50%);
+    animation: heroSignalEnter 150ms cubic-bezier(0.22, 0.9, 0.22, 1) both;
+  }
+
+  .hero-signal-anchor.leaving,
+  .hero-signal-link.leaving {
+    animation: heroSignalExit 240ms cubic-bezier(0.22, 0.9, 0.22, 1) forwards;
+  }
+
+  .hero-signal-anchor {
+    width: 0.82rem;
+    height: 0.82rem;
+    border-radius: 999px;
+    z-index: 1;
+    box-shadow:
+      0 0 0 0.36rem rgba(255, 255, 255, 0.08),
+      0 0 22px rgba(255, 122, 69, 0.22);
+  }
+
+  .hero-signal-anchor::before {
+    content: "";
+    position: absolute;
+    inset: 0.16rem;
+    border-radius: inherit;
+    background: #fff;
+    opacity: 0.92;
+  }
+
+  .hero-signal-link {
+    width: var(--signal-leg);
+    height: 2px;
+    border-radius: 999px;
+    z-index: 0;
+    opacity: 0.9;
+  }
+
+  .hero-signal-group.right .hero-signal-link {
+    transform: translate(0, -50%);
+  }
+
+  .hero-signal-group.left .hero-signal-link {
     transform: translate(-100%, -50%);
   }
 
@@ -684,6 +749,18 @@ main {
       0 0 22px rgba(255, 122, 69, 0.1);
   }
 
+  .hero-signal-anchor.warm {
+    background: rgba(255, 122, 69, 0.9);
+  }
+
+  .hero-signal-link.warm {
+    background: linear-gradient(90deg, rgba(255, 122, 69, 0.65), rgba(255, 122, 69, 0.12));
+  }
+
+  .hero-signal-group.left .hero-signal-link.warm {
+    background: linear-gradient(90deg, rgba(255, 122, 69, 0.12), rgba(255, 122, 69, 0.65));
+  }
+
   .hero-signal-card.cool {
     box-shadow:
       0 14px 32px rgba(10, 10, 12, 0.1),
@@ -691,11 +768,41 @@ main {
       0 0 22px rgba(158, 228, 215, 0.12);
   }
 
+  .hero-signal-anchor.cool {
+    background: rgba(158, 228, 215, 0.92);
+    box-shadow:
+      0 0 0 0.36rem rgba(255, 255, 255, 0.08),
+      0 0 22px rgba(158, 228, 215, 0.22);
+  }
+
+  .hero-signal-link.cool {
+    background: linear-gradient(90deg, rgba(158, 228, 215, 0.7), rgba(158, 228, 215, 0.12));
+  }
+
+  .hero-signal-group.left .hero-signal-link.cool {
+    background: linear-gradient(90deg, rgba(158, 228, 215, 0.12), rgba(158, 228, 215, 0.7));
+  }
+
   .hero-signal-card.gold {
     box-shadow:
       0 14px 32px rgba(10, 10, 12, 0.1),
       0 0 0 1px rgba(255, 211, 105, 0.12),
       0 0 22px rgba(255, 211, 105, 0.12);
+  }
+
+  .hero-signal-anchor.gold {
+    background: rgba(255, 211, 105, 0.94);
+    box-shadow:
+      0 0 0 0.36rem rgba(255, 255, 255, 0.08),
+      0 0 22px rgba(255, 211, 105, 0.24);
+  }
+
+  .hero-signal-link.gold {
+    background: linear-gradient(90deg, rgba(255, 211, 105, 0.74), rgba(255, 211, 105, 0.12));
+  }
+
+  .hero-signal-group.left .hero-signal-link.gold {
+    background: linear-gradient(90deg, rgba(255, 211, 105, 0.12), rgba(255, 211, 105, 0.74));
   }
 
   .hero-signal-icon {
@@ -922,6 +1029,10 @@ h1 em,
   box-shadow: none;
 }
 
+.screen-card {
+  overflow: hidden;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.92fr;
@@ -949,12 +1060,9 @@ h1 em,
   min-height: 12.2rem;
   padding: 1.15rem 1.2rem;
   overflow: hidden;
-  border-radius: 1.35rem;
-  border: 1px solid rgba(17, 17, 17, 0.06);
-  background:
-    radial-gradient(circle at 12% 50%, rgba(255, 122, 69, 0.1), transparent 26%),
-    radial-gradient(circle at 86% 28%, rgba(158, 228, 215, 0.16), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 240, 230, 0.92));
+  border-radius: 0;
+  border: 0;
+  background: transparent;
 }
 
 .hero-flow-scene::after {
@@ -1082,10 +1190,10 @@ h1 em,
 .flow-scan-logo {
   top: 50%;
   left: 50%;
-  width: 2rem;
-  height: 2rem;
-  object-fit: cover;
-  border-radius: 0.7rem;
+  width: calc(100% - 1rem);
+  height: calc(100% - 1rem);
+  object-fit: contain;
+  border-radius: 1rem;
   transform: translate(-50%, -50%);
   z-index: 1;
   opacity: 0.98;
@@ -1143,46 +1251,38 @@ h1 em,
 }
 
 .flow-output {
-  top: 50%;
-  right: 1rem;
-  left: auto;
-  width: min(48%, 28rem);
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.4rem;
+  inset: 0;
   z-index: 4;
+  pointer-events: none;
 }
 
 .flow-chip {
-  min-height: 2.3rem;
-  padding: 0.44rem 0.6rem;
-  display: flex;
+  position: absolute;
+  top: 50%;
+  left: calc(var(--scan-x) + (var(--scan-size) * 0.46));
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  border-radius: 0.88rem;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(19, 34, 31, 0.08);
-  box-shadow: 0 12px 24px rgba(19, 34, 31, 0.05);
+  gap: 0;
+  white-space: nowrap;
   opacity: 0;
-  filter: blur(10px);
-  transform: translateX(-9rem) scale(0.74);
+  filter: blur(8px);
+  transform: translate(0, -50%) scale(0.82);
   animation: flowInsight var(--flow-cycle) cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
   animation-delay: var(--flow-delay);
 }
 
 .flow-chip strong {
-  font-size: 0.82rem;
+  font-size: calc(var(--product-size) * 0.92);
+  font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow:
+    0 12px 22px rgba(19, 34, 31, 0.12),
+    0 0 18px rgba(255, 255, 255, 0.2);
 }
 
 .flow-chip-dot {
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 999px;
-  background: var(--accent-strong);
-  box-shadow: 0 0 0 0.24rem rgba(255, 122, 69, 0.1);
+  display: none;
 }
 
 .flow-chip.warm {
@@ -1224,6 +1324,7 @@ h1 em,
 
 .screen-content {
   padding: 0.85rem;
+  border-radius: inherit;
   background: linear-gradient(180deg, #fbf7ef 0%, #f2ebde 100%);
 }
 
@@ -1247,6 +1348,7 @@ h1 em,
   border-radius: 1.1rem;
   border: 1px solid rgba(17, 17, 17, 0.06);
   background: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
 }
 
 .mini-card {
@@ -1717,6 +1819,17 @@ h1 em,
   margin-top: 0;
 }
 
+#examples .section-title {
+  position: relative;
+  z-index: 2;
+}
+
+#examples .examples-grid {
+  position: relative;
+  z-index: 1;
+  margin-top: -1rem;
+}
+
 .example-card,
 .trust-card,
 .setup-panel {
@@ -1752,14 +1865,12 @@ h1 em,
   position: relative;
   width: 5.8rem;
   height: 5.8rem;
-  border-radius: 1.3rem;
+  border-radius: 0;
   display: grid;
   place-items: center;
-  background:
-    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.84)),
-    linear-gradient(180deg, #f8f3e8, #f1eadc);
-  border: 1px solid rgba(19, 34, 31, 0.08);
-  overflow: hidden;
+  background: transparent;
+  border: 0;
+  overflow: visible;
 }
 
 .example-badge {
@@ -1780,7 +1891,8 @@ h1 em,
   z-index: 2;
   font-size: 3rem;
   transform: translateY(0.1rem);
-  animation: exampleFloat 4.8s ease-in-out infinite;
+  filter: drop-shadow(0 14px 24px rgba(19, 34, 31, 0.12));
+  animation: exampleFloat 3.8s ease-in-out infinite;
 }
 
 .example-card h3 {
@@ -2290,6 +2402,7 @@ h1 em,
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   pointer-events: none;
   z-index: 0;
   opacity: 0;
@@ -2502,26 +2615,26 @@ h1 em,
   37% {
     opacity: 0;
     filter: blur(10px);
-    transform: translateX(-9rem) scale(0.74);
+    transform: translate(0, -50%) scale(0.72);
   }
 
   50% {
     opacity: 1;
     filter: blur(0);
-    transform: translateX(-1rem) scale(1.03);
+    transform: translate(3.2rem, -50%) scale(1.03);
   }
 
   64%,
   82% {
     opacity: 1;
     filter: blur(0);
-    transform: translateX(0) scale(1);
+    transform: translate(6.8rem, -50%) scale(1);
   }
 
   100% {
     opacity: 0;
     filter: blur(8px);
-    transform: translateX(1rem) scale(0.98);
+    transform: translate(9rem, -50%) scale(0.96);
   }
 }
 
@@ -2554,11 +2667,11 @@ h1 em,
 @keyframes exampleFloat {
   0%,
   100% {
-    transform: translateY(0.3rem) rotate(-3deg);
+    transform: translateY(0.45rem) rotate(-5deg) scale(0.98);
   }
 
   50% {
-    transform: translateY(0) rotate(3deg);
+    transform: translateY(-0.15rem) rotate(5deg) scale(1.02);
   }
 }
 
@@ -2668,38 +2781,25 @@ h1 em,
   }
 
   .flow-output {
-    top: 50%;
-    right: 0.8rem;
-    left: auto;
-    bottom: auto;
-    width: auto;
-    max-width: calc(100% - 8.8rem);
-    transform: translateY(-50%) scale(0.84);
-    transform-origin: right center;
-    gap: 0.3rem;
+    inset: 0;
   }
 
   .flow-chip {
-    min-height: 1.78rem;
-    padding: 0.3rem 0.42rem;
-    border-radius: 0.76rem;
-    flex: 0 0 auto;
+    padding: 0;
   }
 
   .flow-chip strong {
-    font-size: 0.68rem;
+    font-size: calc(var(--product-size) * 0.9);
   }
 
   .flow-chip-dot {
-    width: 0.28rem;
-    height: 0.28rem;
-    box-shadow: 0 0 0 0.14rem rgba(255, 122, 69, 0.1);
+    display: none;
   }
 
   .flow-scan-logo {
-    width: 1.55rem;
-    height: 1.55rem;
-    border-radius: 0.55rem;
+    width: calc(100% - 0.8rem);
+    height: calc(100% - 0.8rem);
+    border-radius: 0.8rem;
   }
 
   .hero-grid,
@@ -2882,37 +2982,25 @@ h1 em,
   }
 
   .flow-output {
-    top: 50%;
-    right: 0.55rem;
-    left: auto;
-    bottom: auto;
-    width: auto;
-    max-width: calc(100% - 6.8rem);
-    transform: translateY(-50%) scale(0.66);
-    transform-origin: right center;
-    gap: 0.22rem;
+    inset: 0;
   }
 
   .flow-chip {
-    min-height: 1.54rem;
-    padding: 0.22rem 0.32rem;
-    border-radius: 0.68rem;
-    flex: 0 0 auto;
+    padding: 0;
   }
 
   .flow-chip strong {
-    font-size: 0.58rem;
+    font-size: calc(var(--product-size) * 0.92);
   }
 
   .flow-chip-dot {
-    width: 0.24rem;
-    height: 0.24rem;
+    display: none;
   }
 
   .flow-scan-logo {
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 0.45rem;
+    width: calc(100% - 0.7rem);
+    height: calc(100% - 0.7rem);
+    border-radius: 0.65rem;
   }
 
   .bar-row,

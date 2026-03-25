@@ -38,6 +38,8 @@ const heroShelfHotspots = [
     yMax: 0.4,
     popupX: 0.06,
     popupY: 0.28,
+    anchorX: 0.185,
+    anchorY: 0.28,
     tone: "warm",
     icon: "📈",
     label: "Top seller",
@@ -52,6 +54,8 @@ const heroShelfHotspots = [
     yMax: 0.68,
     popupX: 0.07,
     popupY: 0.53,
+    anchorX: 0.19,
+    anchorY: 0.53,
     tone: "cool",
     icon: "📈",
     label: "Margin",
@@ -66,6 +70,8 @@ const heroShelfHotspots = [
     yMax: 0.985,
     popupX: 0.08,
     popupY: 0.81,
+    anchorX: 0.205,
+    anchorY: 0.81,
     tone: "gold",
     icon: "📉",
     label: "Low stock",
@@ -80,6 +86,8 @@ const heroShelfHotspots = [
     yMax: 0.4,
     popupX: 0.94,
     popupY: 0.28,
+    anchorX: 0.815,
+    anchorY: 0.28,
     tone: "cool",
     icon: "📈",
     label: "This week",
@@ -94,6 +102,8 @@ const heroShelfHotspots = [
     yMax: 0.68,
     popupX: 0.93,
     popupY: 0.53,
+    anchorX: 0.81,
+    anchorY: 0.53,
     tone: "gold",
     icon: "📉",
     label: "Expiry risk",
@@ -108,6 +118,8 @@ const heroShelfHotspots = [
     yMax: 0.985,
     popupX: 0.92,
     popupY: 0.81,
+    anchorX: 0.795,
+    anchorY: 0.81,
     tone: "warm",
     icon: "📉",
     label: "Lost sales",
@@ -173,7 +185,7 @@ function HeroFlowScene() {
           <span className="flow-scan-grid" />
           <span className="flow-scan-beam" />
           <span className="flow-scan-pulse" />
-          <img className="flow-scan-logo" src="/logo_128.png" alt="" />
+          <img className="flow-scan-logo" src="/logo_512.png" alt="" />
         </div>
 
         <div className="flow-products">
@@ -502,17 +514,26 @@ export default function LandingPage() {
         <div className="hero-hover-layer desktop-only" aria-hidden="true">
           <div ref={heroCenterGlowRef} className="hero-center-cursor-zone" data-active="false" />
           {activeHeroSignal ? (
-            <div
-              key={activeHeroSignal.renderId}
-              className={`hero-signal ${activeHeroSignal.side}`}
-              style={{ left: `${activeHeroSignal.popupX * 100}%`, top: `${activeHeroSignal.popupY * 100}%` }}
-            >
-              <div className={`hero-signal-card ${activeHeroSignal.tone} ${activeHeroSignal.leaving ? "leaving" : ""}`}>
-                <span className="hero-signal-icon">{activeHeroSignal.icon}</span>
-                <span className="hero-signal-copy">
-                  <small>{activeHeroSignal.label}</small>
-                  <strong>{activeHeroSignal.value}</strong>
-                </span>
+            <div key={activeHeroSignal.renderId} className={`hero-signal-group ${activeHeroSignal.side}`}>
+              <span
+                className={`hero-signal-anchor ${activeHeroSignal.tone} ${activeHeroSignal.leaving ? "leaving" : ""}`}
+                style={{ left: `${activeHeroSignal.anchorX * 100}%`, top: `${activeHeroSignal.anchorY * 100}%` }}
+              />
+              <span
+                className={`hero-signal-link ${activeHeroSignal.tone} ${activeHeroSignal.leaving ? "leaving" : ""}`}
+                style={{ left: `${activeHeroSignal.anchorX * 100}%`, top: `${activeHeroSignal.anchorY * 100}%` }}
+              />
+              <div
+                className={`hero-signal ${activeHeroSignal.side}`}
+                style={{ left: `${activeHeroSignal.anchorX * 100}%`, top: `${activeHeroSignal.anchorY * 100}%` }}
+              >
+                <div className={`hero-signal-card ${activeHeroSignal.tone} ${activeHeroSignal.leaving ? "leaving" : ""}`}>
+                  <span className="hero-signal-icon">{activeHeroSignal.icon}</span>
+                  <span className="hero-signal-copy">
+                    <small>{activeHeroSignal.label}</small>
+                    <strong>{activeHeroSignal.value}</strong>
+                  </span>
+                </div>
               </div>
             </div>
           ) : null}
