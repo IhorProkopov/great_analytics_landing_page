@@ -182,10 +182,7 @@ function HeroFlowScene() {
         <div className="flow-track-line flow-track-line-accent" />
 
         <div className="flow-scan-zone">
-          <span className="flow-scan-grid" />
-          <span className="flow-scan-beam" />
-          <span className="flow-scan-pulse" />
-          <img className="flow-scan-logo" src="/logo_128.png" alt="" />
+          <span className="flow-scan-mark">S8</span>
         </div>
 
         <div className="flow-products">

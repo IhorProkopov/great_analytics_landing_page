@@ -1278,11 +1278,11 @@ const he = {
     ],
     stockoutTitle: "תחזית חוסרי מלאי",
     stockouts: [
-      { name: "ביצי חופש 12 יח'", meta: "מוצרי חלב · 40 יח'", status: "1.9d · קריטי", tone: "danger" },
-      { name: "גבינת צ'דר 200g", meta: "מוצרי חלב · 55 יח'", status: "6.4d · אזהרה", tone: "warning" },
-      { name: "חלב 1L", meta: "מוצרי חלב · 35 יח'", status: "17.5d · OK", tone: "success" },
-      { name: "לחם מחמצת", meta: "מאפייה · 143 יח'", status: "7.9d · OK", tone: "success" },
-      { name: "יוגורט יווני 500g", meta: "מוצרי חלב · 93 יח'", status: "27.9d · OK", tone: "success" },
+      { name: "ביצי חופש 12 יח'", meta: "מוצרי חלב · 40 יח'", status: "קריטי · 1.9d", tone: "danger" },
+      { name: "גבינת צ'דר 200g", meta: "מוצרי חלב · 55 יח'", status: "אזהרה · 6.4d", tone: "warning" },
+      { name: "חלב 1L", meta: "מוצרי חלב · 35 יח'", status: "תקין · 17.5d", tone: "success" },
+      { name: "לחם מחמצת", meta: "מאפייה · 143 יח'", status: "תקין · 7.9d", tone: "success" },
+      { name: "יוגורט יווני 500g", meta: "מוצרי חלב · 93 יח'", status: "תקין · 27.9d", tone: "success" },
     ],
   },
   pipeline: {
@@ -1320,10 +1320,10 @@ const he = {
       ],
       panelTitle: "מוצרים שצריכים תשומת לב",
       rows: [
-        { label: "ביצי חופש 12 יח'", status: "1.9d · קריטי", tone: "danger" },
-        { label: "גבינת צ'דר 200g", status: "6.4d · אזהרה", tone: "warning" },
-        { label: "חלב 1L", status: "17.5d · OK", tone: "success" },
-        { label: "בננות אורגניות", status: "9.1d · OK", tone: "success" },
+        { label: "ביצי חופש 12 יח'", status: "קריטי · 1.9d", tone: "danger" },
+        { label: "גבינת צ'דר 200g", status: "אזהרה · 6.4d", tone: "warning" },
+        { label: "חלב 1L", status: "תקין · 17.5d", tone: "success" },
+        { label: "בננות אורגניות", status: "תקין · 9.1d", tone: "success" },
       ],
     },
     sales: {
