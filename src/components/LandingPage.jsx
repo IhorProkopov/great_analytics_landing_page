@@ -26,6 +26,9 @@ const heroFlowInsights = [
   { value: "+12%", tone: "gold" },
   { value: "1.9d", tone: "danger" },
   { value: "87%", tone: "cool" },
+  { value: "€420", tone: "warm" },
+  { value: "34.6%", tone: "gold" },
+  { value: "8", tone: "cool" },
 ];
 
 const heroShelfHotspots = [

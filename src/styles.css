@@ -1069,6 +1069,7 @@ h1 em,
   --scan-size: 7.2rem;
   --product-size: 3.9rem;
   --scan-contact-offset: 5.55rem;
+  --insight-travel: clamp(24rem, 34vw, 33rem);
   position: relative;
   min-height: 12.2rem;
   padding: 1.15rem 1.2rem;
@@ -2584,31 +2585,43 @@ h1 em,
   45.5% {
     opacity: 0.92;
     filter: blur(0);
-    transform: translate(0.15rem, -50%) scale(1.03);
+    transform: translate(calc(var(--insight-travel) * 0.01), -50%) scale(1.03);
   }
 
   48% {
     opacity: 1;
     filter: blur(0);
-    transform: translate(1.9rem, -50%) scale(1.02);
+    transform: translate(calc(var(--insight-travel) * 0.08), -50%) scale(1.02);
   }
 
-  58% {
+  62% {
     opacity: 1;
     filter: blur(0);
-    transform: translate(8.8rem, -50%) scale(1);
+    transform: translate(calc(var(--insight-travel) * 0.42), -50%) scale(1);
   }
 
-  64% {
-    opacity: 0;
-    filter: blur(4px);
-    transform: translate(13.2rem, -50%) scale(0.98);
+  82% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(calc(var(--insight-travel) * 0.82), -50%) scale(1);
+  }
+
+  92% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(calc(var(--insight-travel) * 0.95), -50%) scale(1);
+  }
+
+  96% {
+    opacity: 0.58;
+    filter: blur(1.5px);
+    transform: translate(calc(var(--insight-travel) * 1.02), -50%) scale(0.99);
   }
 
   100% {
     opacity: 0;
-    filter: blur(8px);
-    transform: translate(15.5rem, -50%) scale(0.94);
+    filter: blur(6px);
+    transform: translate(calc(var(--insight-travel) * 1.08), -50%) scale(0.96);
   }
 }
 
