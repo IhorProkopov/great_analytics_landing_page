@@ -176,7 +176,7 @@ function ExampleVisual({ icon, badge }) {
 
 function HeroFlowScene() {
   return (
-    <div className="hero-flow-scene hover-rise cursor-reactive" aria-hidden="true">
+    <div className="hero-flow-scene" aria-hidden="true">
       <div className="flow-track">
         <div className="flow-track-line" />
         <div className="flow-track-line flow-track-line-accent" />
@@ -185,7 +185,7 @@ function HeroFlowScene() {
           <span className="flow-scan-grid" />
           <span className="flow-scan-beam" />
           <span className="flow-scan-pulse" />
-          <img className="flow-scan-logo" src="/logo_512.png" alt="" />
+          <img className="flow-scan-logo" src="/logo_128.png" alt="" />
         </div>
 
         <div className="flow-products">
